@@ -12,6 +12,9 @@ client.on("ready", () => {
 
 client.on('message', message => {
   if (!message.content.startsWith(prefix) || message.author.bot) return;
+  if (!message.member.roles.cache.some(r => r.name === "Staff" || r.name === "SkilledUsers")) {
+    return message.channel.send(`You don't have permission to use that command, ${message.author}.`);
+  }
 
   const args = message.content.slice(prefix.length).split(' ');
   const command = args.shift().toLowerCase();
