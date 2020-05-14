@@ -24,8 +24,14 @@ client.on('message', message => {
       return message.channel.send(`You didn't provide any arguments, ${message.author}! Right click on the message you want to pin and click "Copy ID", and use that as the argument.`);
     }
     message.channel.messages.fetch(args[0])
-      .then(msg => msg.pin())
-      .catch(console.error);
+      .then(msg => msg.pin());
+    message.delete();
+  }  else if (command === 'unpin') {
+    if (!args.length) {
+      return message.channel.send(`You didn't provide any arguments, ${message.author}! Right click on the message you want to pin and click "Copy ID", and use that as the argument.`);
+    }
+    message.channel.messages.fetch(args[0])
+      .then(msg => msg.unpin());
     message.delete();
   }  
 });
